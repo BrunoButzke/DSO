@@ -2,7 +2,7 @@ class Player:
     def __init__(self, matricula, number):
         self.__matricula = matricula
         self.__number = number
-        self.__cartoes = 0
+        self.__cards = 0
     
     @property
     def matricula(self):
@@ -13,9 +13,9 @@ class Player:
         return self.__number
     
     @property
-    def cartoes(self):
-        return self.__cartoes
+    def cards(self):
+        return self.__cards
     
-    @cartoes.setter
-    def cartoes(self, cartoes):
-        self.cartoes = cartoes
+    @cards.setter
+    def cards(self, cards):
+        self.__cards = cards

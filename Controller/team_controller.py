@@ -6,6 +6,16 @@ class TeamController:
     def __init__(self):
         self.__teams = []
     
+    @property
+    def teams(self):
+        return self.__teams
+
+    def add_score(self, index_team, score):
+        self.teams[index_team].score = score
+    
+    def add_card(self, index_team, index_player):
+        self.teams[index_team].players_in_field[index_player].cards += 1
+
     def create_team(self, name, number_of_players, players_in_field, players_in_bank):
         self.__teams.append(Team(name, number_of_players, players_in_field, players_in_bank))
 
@@ -29,3 +39,4 @@ class TeamController:
         self.create_team(name, number_players, jogadores_linha, jogadores_banco)
 
         return self
+
