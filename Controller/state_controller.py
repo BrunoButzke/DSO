@@ -1,7 +1,8 @@
 from Controller.modality_controller import ModalityController
 from Controller.team_controller import TeamController
 from Controller.player_controller import PlayerController
-
+from Controller.game_controller import GameController
+from Controller.report_controller import ReportController
 
 class StateController:
     def __init__(self):
@@ -12,3 +13,5 @@ class StateController:
         self.__modality_controller = ModalityController().main()
         self.__teams_controller = TeamController().main(self.__modality_controller.modality.number_of_players)
         self.__teams_controller.main(self.__modality_controller.modality.number_of_players)
+        GameController(self.__teams_controller).main()
+        print(ReportController(self.__modality_controller, self.__teams_controller))
