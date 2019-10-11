@@ -3,6 +3,6 @@ class PlayerScreen:
         pass
     
     def get_data(self):
-        matricula = input('informe a matricula do jogador: ')
-        number = input('informe o numero do jogador: ')
+        matricula = input("\nInforme a matricula do jogador: ")
+        number = input("\nInforme o numero do jogador: ")
         return matricula, number

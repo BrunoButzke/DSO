@@ -3,7 +3,7 @@ class ModalityScreen:
         pass
 
     def get_data(self):
-        name = input("qual o nome da modalidade ?")
-        number_players = input("qual o numero maximo de jogadores por time ?")
-        gender = input("qual o genero da modalidade")
+        name = input("\nQual o nome da modalidade: ")
+        number_players = input("\nQual o numero de jogadores titulares por time: ")
+        gender = input("\nQual o genero da modalidade: ")
         return name, int(number_players), gender
