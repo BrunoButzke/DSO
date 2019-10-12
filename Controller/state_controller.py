@@ -4,6 +4,7 @@ from Controller.player_controller import PlayerController
 from Controller.game_controller import GameController
 from Controller.report_controller import ReportController
 
+
 class StateController:
     def __init__(self):
         self.__modality_controller = None
@@ -12,7 +13,12 @@ class StateController:
     def start_flow(self):
         self.__modality_controller = ModalityController().main()
         self.__teams_controller = TeamController()
-        self.__teams_controller.main(self.__modality_controller.modality.number_of_players)
-        self.__teams_controller.main(self.__modality_controller.modality.number_of_players)
+
+        number_of_players = self.__modality_controller.modality.number_of_players
+        # instantiate first team
+        self.__teams_controller.main(number_of_players)
+        # instantiate second team
+        self.__teams_controller.main(number_of_players)
+
         GameController(self.__teams_controller).main()
         print(ReportController(self.__modality_controller, self.__teams_controller))

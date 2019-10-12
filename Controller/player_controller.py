@@ -5,9 +5,9 @@ class PlayerController:
     def __init__(self):
         pass
 
-    def create_player(self, matricula, number):
-        return Player(matricula, number)
+    def create_player(self, registration, number):
+        return Player(registration, number)
 
     def main(self):
-        matricula, number = PlayerScreen().get_data()
-        return self.create_player(matricula, number)
+        registration, number = PlayerScreen().get_data()
+        return self.create_player(registration, number)

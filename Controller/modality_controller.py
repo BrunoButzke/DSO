@@ -3,11 +3,11 @@ from View.modality_screen import ModalityScreen
 
 class ModalityController:
     def __init__(self):
-        self.__modality = None 
+        self.__modality = None
 
     def __str__(self):
         return self.__modality.name
-    
+
     def create_modality(self, name, number_of_players_per_team, gender):
         self.__modality = Modality(name, number_of_players_per_team, gender)
 

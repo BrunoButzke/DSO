@@ -3,7 +3,7 @@ from View.game_screen import GameScreen
 class GameController:
     def __init__(self, teams):
         self.__teams = teams
-    
+
     def main(self):
         while True:
             option = GameScreen().get_option()
@@ -17,22 +17,22 @@ class GameController:
             elif option == 4:
                 break
             else:
-                print("\n opção invalida, tente novamente")
-            
+                print("\n Opção inválida, tente novamente")
+
     def add_score(self):
         index_team = GameScreen().get_team(self.__teams.teams)
         score = GameScreen().get_score(self.__teams.teams[index_team].name)
         self.__teams.add_score(index_team, score)
-    
+
     def add_card(self):
         index_team = GameScreen().get_team(self.__teams.teams)
-        index_player = GameScreen().get_player(self.__teams.teams[index_team].players_in_field)
+        index_player = GameScreen().get_player(self.__teams.teams[index_team].players_at_field)
         self.__teams.add_card(index_team, index_player)
-    
+
     def replace_player(self):
         index_team = GameScreen().get_team(self.__teams.teams)
-        titular, reserver = GameScreen().get_replacement_players(
-            self.__teams.teams[index_team].players_in_field,
-            self.__teams.teams[index_team].players_in_bank
-            )
-        self.__teams.replace_player(index_team, titular, reserver)
+        starter, bench = GameScreen().get_replacement_players(
+            self.__teams.teams[index_team].players_at_field,
+            self.__teams.teams[index_team].players_at_bench
+        )
+        self.__teams.replace_player(index_team, starter, bench)
