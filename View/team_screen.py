@@ -2,8 +2,11 @@ class TeamScreen:
     def __init__(self):
         pass
 
+    def section_name(self):
+        print('''\n>>>>>>>>>> Configuração do Time <<<<<<<<<<''')
+
     def get_name(self):
-        name = input('Qual o nome do time?')
+        name = input('\nQual o nome do time? ')
         return name
 
     def get_number_of_players(self):

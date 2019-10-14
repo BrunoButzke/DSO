@@ -5,6 +5,7 @@ class GameController:
         self.__teams = teams
 
     def main(self):
+        GameScreen().section_name()
         while True:
             option = GameScreen().get_option()
 

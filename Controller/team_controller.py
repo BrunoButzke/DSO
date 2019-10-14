@@ -10,6 +10,9 @@ class TeamController:
     def teams(self):
         return self.__teams
 
+    def section_name(self):
+        TeamScreen().section_name()
+
     def add_score(self, index_team, score):
         self.teams[index_team].score = score
 
