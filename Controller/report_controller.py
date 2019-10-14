@@ -5,12 +5,14 @@ class ReportController:
 
     def __str__(self):
         return '''
+>>>>>>>>>> Relatório <<<<<<<<<<
+
                 Modalidade : {modality_name} {gender}
-        ----------------------------------------------
+    ----------------------------------------------
         Equipe      {first_team}
         Pontuação   {first_team_score}
         Jogador número {first_player_number} teve {first_player_cards} cartões
-        ----------------------------------------------
+    ----------------------------------------------
         Equipe      {second_team}
         Pontuação   {second_team_score}
         Jogador número {second_player_number} teve {second_player_cards} cartões

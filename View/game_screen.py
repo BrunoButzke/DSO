@@ -12,19 +12,20 @@ class GameScreen:
             except Exception:
                 print("\nOps, Você deve informar um número [0 à {max}]".format(max = max_value))
 
+    def section_name(self):
+        print('''\n>>>>>>>>>> Inicializar Partida <<<<<<<<<<''')
+
     def get_option(self):
         print('''
-
                     Menu de opções
             ------------------------------
             1 - Marcar pontos
             2 - Dar cartão para jogador
             3 - Substituir um jogador
             4 - Finalizar a partida
-
             ''')
 
-        return self.check_valid_response("\nDigite o número da opção desejada: ", 4)
+        return self.check_valid_response("Digite o número da opção desejada: ", 4)
 
     def get_team(self, teams):
         print('''
@@ -37,7 +38,7 @@ class GameScreen:
             name_second_team = teams[1].name
         ))
 
-        return self.check_valid_response("\nQual time? (informe o número): ", 1)
+        return self.check_valid_response("Qual time? (informe o número): ", 1)
 
     def get_score(self, team_name):
         return  self.check_valid_response("\nQuantos pontos {name} deve ganhar? ".format(name = team_name), 100)
