@@ -11,7 +11,8 @@ class StateController:
 
     def start_flow(self):
         self.__modality_controller = ModalityController().main()
-        self.__teams_controller = TeamController().main(self.__modality_controller.modality.number_of_players)
+        self.__teams_controller = TeamController()
+        self.__teams_controller.main(self.__modality_controller.modality.number_of_players)
         self.__teams_controller.main(self.__modality_controller.modality.number_of_players)
         GameController(self.__teams_controller).main()
         print(ReportController(self.__modality_controller, self.__teams_controller))

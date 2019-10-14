@@ -10,7 +10,7 @@ class GameScreen:
                     raise Exception()
                 return response
             except Exception:
-                print("Ops, Você deve informar um numero [0 á {max}]".format(max = max_value))
+                print("\nOps, Você deve informar um numero [0 á {max}]".format(max = max_value))
     
     def get_option(self):
         print('''
@@ -24,7 +24,7 @@ class GameScreen:
 
             ''')
             
-        return self.check_valid_response("digite o numero da opção desejada: ", 4)
+        return self.check_valid_response("\nDigite o numero da opção desejada: ", 4)
 
     def get_team(self, teams):
         print('''
@@ -37,10 +37,10 @@ class GameScreen:
             name_second_team = teams[1].name
         ))
 
-        return self.check_valid_response("Qual time ? (informe o numero): ", 1) 
+        return self.check_valid_response("\nQual time ? (informe o numero): ", 1) 
 
     def get_score(self, team_name):
-        return  self.check_valid_response("Quantos pontos {name} deve ganhar ? ".format(name = team_name), 100) 
+        return  self.check_valid_response("\nQuantos pontos {name} deve ganhar ? ".format(name = team_name), 100) 
 
     def get_player(self, team_players):
         string = '''
@@ -53,4 +53,30 @@ class GameScreen:
         
         print(string)
 
-        return self.check_valid_response("Qual jogador deve receber o cartão: ", len(team_players))
+        return self.check_valid_response("\nQual jogador deve receber o cartão: ", len(team_players))
+
+    def get_replacement_players(self, players_in_field, players_in_bank):
+        string = '''
+                Jogadores titulares
+        ----------------------------------
+        '''
+        count = 0
+        for player in players_in_field:
+            string += '''{index} - {number}'''.format(index=count, number=player.number)
+        
+        string += '''
+
+                Jogadores reservas
+        ----------------------------------
+        '''
+        count = 0
+        for player in players_in_bank:
+            string += '''{index} - {number}'''.format(index=count, number=player.number)
+        
+        print(string)
+
+        titular_player = self.check_valid_response("\nQual jogador deve sair: ", len(players_in_field))
+
+        reserve_player = self.check_valid_response("\nQual jogador deve entrar: ", len(players_in_bank))
+
+        return titular_player, reserve_player

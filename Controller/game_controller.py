@@ -13,7 +13,7 @@ class GameController:
             elif option == 2:
                 self.add_card()
             elif option == 3:
-                self.replase_player()
+                self.replace_player()
             elif option == 4:
                 break
             else:
@@ -29,5 +29,10 @@ class GameController:
         index_player = GameScreen().get_player(self.__teams.teams[index_team].players_in_field)
         self.__teams.add_card(index_team, index_player)
     
-    def replase_player(self):
-        pass
+    def replace_player(self):
+        index_team = GameScreen().get_team(self.__teams.teams)
+        titular, reserver = GameScreen().get_replacement_players(
+            self.__teams.teams[index_team].players_in_field,
+            self.__teams.teams[index_team].players_in_bank
+            )
+        self.__teams.replace_player(index_team, titular, reserver)

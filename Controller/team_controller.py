@@ -15,6 +15,16 @@ class TeamController:
     
     def add_card(self, index_team, index_player):
         self.teams[index_team].players_in_field[index_player].cards += 1
+    
+    def replace_player(self, index_team, titular, reserver):
+        titular_player = self.__teams[index_team].players_in_field[titular]
+        reserver_player = self.__teams[index_team].players_in_bank[reserver]
+
+        self.__teams[index_team].players_in_field.remove(titular_player)
+        self.__teams[index_team].players_in_bank.append(titular_player)
+
+        self.__teams[index_team].players_in_bank.remove(reserver_player)
+        self.__teams[index_team].players_in_field.append(reserver_player)
 
     def create_team(self, name, number_of_players, players_in_field, players_in_bank):
         self.__teams.append(Team(name, number_of_players, players_in_field, players_in_bank))
