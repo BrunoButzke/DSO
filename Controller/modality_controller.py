@@ -1,8 +1,12 @@
+from Controller.abstract_modality_controller import AbstractModalityController
+
 from Model.modality import Modality
 from View.modality_screen import ModalityScreen
 
-class ModalityController:
+
+class ModalityController(AbstractModalityController):
     def __init__(self):
+        super().__init__()
         self.__modality = None
 
     def __str__(self):

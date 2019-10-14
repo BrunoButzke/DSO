@@ -1,7 +1,11 @@
+from Controller.abstract_game_controller import AbstractGameController
+
 from View.game_screen import GameScreen
 
-class GameController:
+
+class GameController(AbstractGameController):
     def __init__(self, teams):
+        super().__init__()
         self.__teams = teams
 
     def main(self):

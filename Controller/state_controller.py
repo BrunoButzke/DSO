@@ -23,4 +23,4 @@ class StateController:
         self.__teams_controller.main(number_of_players)
 
         GameController(self.__teams_controller).main()
-        print(ReportController(self.__modality_controller, self.__teams_controller))
+        ReportController(self.__modality_controller, self.__teams_controller).show_report()

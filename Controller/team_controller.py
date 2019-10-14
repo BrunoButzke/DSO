@@ -1,9 +1,13 @@
+from Controller.abstract_team_controller import AbstractTeamController
+
 from View.team_screen import TeamScreen
 from Model.team import Team
 from Controller.player_controller import PlayerController
 
-class TeamController:
+
+class TeamController(AbstractTeamController):
     def __init__(self):
+        super().__init__()
         self.__teams = []
 
     @property
