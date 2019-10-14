@@ -9,8 +9,10 @@ class GameScreen:
                 if response > max_value :
                     raise Exception()
                 return response
+            except ValueError:
+                print("\nOps, Você deve informar um número")
             except Exception:
-                print("\nOps, Você deve informar um número [0 à {max}]".format(max = max_value))
+                print("\nO número deve estar entre [0 e {max}]".format(max = max_value))
 
     def section_name(self):
         print('''\n>>>>>>>>>> Inicializar Partida <<<<<<<<<<''')
