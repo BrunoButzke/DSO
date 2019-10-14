@@ -1,7 +1,7 @@
 class GameScreen:
     def __init__(self):
         pass
-    
+
     def check_valid_response(self, string, max_value):
         while True:
             try:
@@ -10,8 +10,8 @@ class GameScreen:
                     raise Exception()
                 return response
             except Exception:
-                print("\nOps, Você deve informar um numero [0 á {max}]".format(max = max_value))
-    
+                print("\nOps, Você deve informar um número [0 à {max}]".format(max = max_value))
+
     def get_option(self):
         print('''
 
@@ -19,12 +19,12 @@ class GameScreen:
             ------------------------------
             1 - Marcar pontos
             2 - Dar cartão para jogador
-            3 - Substituir um jogador 
+            3 - Substituir um jogador
             4 - Finalizar a partida
 
             ''')
-            
-        return self.check_valid_response("\nDigite o numero da opção desejada: ", 4)
+
+        return self.check_valid_response("\nDigite o número da opção desejada: ", 4)
 
     def get_team(self, teams):
         print('''
@@ -37,10 +37,10 @@ class GameScreen:
             name_second_team = teams[1].name
         ))
 
-        return self.check_valid_response("\nQual time ? (informe o numero): ", 1) 
+        return self.check_valid_response("\nQual time? (informe o número): ", 1)
 
     def get_score(self, team_name):
-        return  self.check_valid_response("\nQuantos pontos {name} deve ganhar ? ".format(name = team_name), 100) 
+        return  self.check_valid_response("\nQuantos pontos {name} deve ganhar? ".format(name = team_name), 100)
 
     def get_player(self, team_players):
         string = '''
@@ -50,33 +50,33 @@ class GameScreen:
         count = 0
         for player in team_players:
             string += '''{index} - {number}'''.format(index=count, number=player.number)
-        
+
         print(string)
 
-        return self.check_valid_response("\nQual jogador deve receber o cartão: ", len(team_players))
+        return self.check_valid_response("\nQual jogador deve receber o cartão? ", len(team_players))
 
-    def get_replacement_players(self, players_in_field, players_in_bank):
+    def get_replacement_players(self, players_at_field, players_at_bench):
         string = '''
                 Jogadores titulares
         ----------------------------------
         '''
         count = 0
-        for player in players_in_field:
+        for player in players_at_field:
             string += '''{index} - {number}'''.format(index=count, number=player.number)
-        
+
         string += '''
 
                 Jogadores reservas
         ----------------------------------
         '''
         count = 0
-        for player in players_in_bank:
+        for player in players_at_bench:
             string += '''{index} - {number}'''.format(index=count, number=player.number)
-        
+
         print(string)
 
-        titular_player = self.check_valid_response("\nQual jogador deve sair: ", len(players_in_field))
+        starter_player = self.check_valid_response("\nQual jogador deve sair? ", len(players_at_field))
 
-        reserve_player = self.check_valid_response("\nQual jogador deve entrar: ", len(players_in_bank))
+        bench_player = self.check_valid_response("\nQual jogador deve entrar? ", len(players_at_bench))
 
-        return titular_player, reserve_player
+        return starter_player, bench_player
