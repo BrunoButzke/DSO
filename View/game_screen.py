@@ -6,7 +6,7 @@ class GameScreen:
         while True:
             try:
                 response = int(input(string))
-                if response > max_value :
+                if response > max_value or response < 0 :
                     raise Exception()
                 return response
             except ValueError:
@@ -30,15 +30,16 @@ class GameScreen:
         return self.check_valid_response("Digite o número da opção desejada: ", 4)
 
     def get_team(self, teams):
-        print('''
+        string ='''
                     Times
         ------------------------------
-        0 - {name_first_team}
-        1 - {name_second_team}
-        '''.format(
-            name_first_team = teams[0].name,
-            name_second_team = teams[1].name
-        ))
+        '''
+
+        for team in teams:
+            string += '''{index} - {number}
+        '''.format(index=teams.index(team), number=team.name)
+
+        print(string)
 
         return self.check_valid_response("Qual time? (informe o número): ", 1)
 
@@ -50,9 +51,9 @@ class GameScreen:
                 Jogadores
         -------------------------
         '''
-        count = 0
         for player in team_players:
-            string += '''{index} - {number}'''.format(index=count, number=player.number)
+            string += '''{index} - {number}
+        '''.format(index=team_players.index(player), number=player.number)
 
         print(string)
 
@@ -63,18 +64,18 @@ class GameScreen:
                 Jogadores titulares
         ----------------------------------
         '''
-        count = 0
         for player in players_at_field:
-            string += '''{index} - {number}'''.format(index=count, number=player.number)
+            string += '''{index} - {number}
+        '''.format(index=players_at_field.index(player), number=player.number)
 
         string += '''
 
                 Jogadores reservas
         ----------------------------------
         '''
-        count = 0
         for player in players_at_bench:
-            string += '''{index} - {number}'''.format(index=count, number=player.number)
+            string += '''{index} - {number}
+        '''.format(index=players_at_bench.index(player), number=player.number)
 
         print(string)
 

@@ -16,13 +16,13 @@ class ModalityScreen:
         while True:
             try:
                 response = int(input(string))
-                if response > max_value :
+                if response > max_value or response < 1 :
                     raise Exception()
                 return response
             except ValueError:
                 print("\nOps, Você deve informar um número")
             except Exception:
-                print("\nO número deve estar entre [0 e {max}]".format(max = max_value))
+                print("\nO número deve estar entre [1 e {max}]".format(max = max_value))
 
     def section_name(self):
         print('''

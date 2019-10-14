@@ -16,7 +16,7 @@ class TeamScreen:
         while True:
             try:
                 response = int(input(string))
-                if response > max_value :
+                if response > max_value or response < 0 :
                     raise Exception()
                 return response
             except ValueError:
