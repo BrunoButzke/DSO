@@ -1,3 +1,5 @@
+import PySimpleGUI as view
+
 class GameScreen:
     def __init__(self):
         pass
@@ -18,6 +20,19 @@ class GameScreen:
         print('''\n>>>>>>>>>> Inicializar Partida <<<<<<<<<<''')
 
     def get_option(self):
+
+        layout = [
+            [view.Button('Marcar Pontos', key='1')],
+            [view.Button('Dar Cartão', key='2')],
+            [view.Button('Substituir', key='3')],
+            [view.Button('Finalizar', key='4')]
+        ]
+        window = view.Window('Jogo').Layout(layout)
+        button, values = window.Read()
+        window.close()
+
+        return int(button)
+
         print('''
                     Menu de opções
             ------------------------------
@@ -28,8 +43,20 @@ class GameScreen:
             ''')
 
         return self.check_valid_response("Digite o número da opção desejada: ", 4)
-
+    
     def get_team(self, teams):
+
+        layout = [
+            [view.Button(teams[0].name, key='0')],
+            [view.Button(teams[1].name, key='1')]
+        ]
+
+        window = view.Window('Time').Layout(layout)
+        button, values = window.Read()
+        window.close()
+        
+        return button
+
         string ='''
                     Times
         ------------------------------

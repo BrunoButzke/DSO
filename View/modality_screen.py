@@ -1,3 +1,6 @@
+import PySimpleGUI as view
+
+
 class ModalityScreen:
     def __init__(self):
         pass
@@ -30,7 +33,23 @@ class ModalityScreen:
         ''')
 
     def get_data(self):
-        name = self.check_valid_string_response("\nQual o nome da modalidade? ")
-        number_of_players = self.check_valid_int_response("\nQual o número de jogadores titulares por time? ", 10)
-        gender = self.check_valid_string_response("\nQual o gênero da modalidade? ")
-        return name, int(number_of_players), gender
+
+        layout = [
+            [view.Text('Qual o nome da modalidade?')],
+            [view.InputText()],
+            [view.Text('Qual o número de jogadores titulares por time?')],
+            [view.InputText()],
+            [view.Text('Qual o gênero da modalidade?')],
+            [view.InputText()],
+            [view.Submit()]  
+        ]
+        window = view.Window('Modalidade').Layout(layout)
+        button, values = window.Read()
+        window.close()
+        return values[0], int(values[1]), values[2]
+        
+        #name = self.check_valid_string_response("\nQual o nome da modalidade? ")
+        #number_of_players = self.check_valid_int_response("\nQual o número de jogadores titulares por time? ", 10)
+        #gender = self.check_valid_string_response("\nQual o gênero da modalidade? ")
+        #return name, int(number_of_players), gender
+        

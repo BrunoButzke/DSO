@@ -1,3 +1,6 @@
+import PySimpleGUI as view
+
+
 class TeamScreen:
     def __init__(self):
         pass
@@ -34,6 +37,20 @@ class TeamScreen:
     def get_number_of_players(self):
         number_of_players = self.check_valid_int_response("\nQual o número total de jogadores de sua equipe? ", 20)
         return number_of_players
+
+    def get_data(self):
+        layout = [
+            [view.Text('Qual o nome do time?')],
+            [view.InputText()],
+            [view.Text('Qual o número total de jogadores de sua equipe?')],
+            [view.InputText()],
+            [view.Submit()]  
+        ]
+        window = view.Window('Time').Layout(layout)
+        button, values = window.Read()
+        window.close()
+
+        return values[0], int(values[1])
 
     def alert_min_players(self, min_players):
         print("\nAtenção: o número mínimo de jogadores deve ser igual a " + str(min_players))
