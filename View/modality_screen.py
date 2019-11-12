@@ -4,7 +4,7 @@ import PySimpleGUI as view
 class ModalityScreen:
     def __init__(self):
         pass
-    
+
     def check_valid_string_response(self, string):
         while True:
             try:
@@ -36,7 +36,7 @@ class ModalityScreen:
             [view.InputText()],
             [view.Text('Qual o gênero da modalidade?')],
             [view.InputText()],
-            [view.Submit()]  
+            [view.Submit()]
         ]
         window = view.Window('Modalidade').Layout(layout)
         button, values = window.Read()

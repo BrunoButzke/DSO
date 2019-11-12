@@ -33,7 +33,34 @@ class GameScreen:
 
         return int(button)
 
+        print('''
+                    Menu de opções
+            ------------------------------
+            1 - Marcar pontos
+            2 - Dar cartão para jogador
+            3 - Substituir um jogador
+            4 - Finalizar a partida
+            ''')
+
+        return self.check_valid_response("Digite o número da opção desejada: ", 4)
+
     def get_team(self, teams):
+
+        layout = [
+            [view.Button(teams[0].name, key='0')],
+            [view.Button(teams[1].name, key='1')]
+        ]
+
+        window = view.Window('Time').Layout(layout)
+        button, values = window.Read()
+        window.close()
+
+        return int(button)
+
+        string ='''
+                    Times
+        ------------------------------
+        '''
 
         if(teams[0] != None):
             first_team = [
@@ -53,14 +80,14 @@ class GameScreen:
         window = view.Window('Time').Layout(layout)
         button, values = window.Read()
         window.close()
-        
+
         return int(button)
 
     def get_score(self, team_name):
         layout = [
             [view.Text('Quantos pontos o time ' + str(team_name) + ' deve ganhar ?')],
             [view.InputText()],
-            [view.Submit()]  
+            [view.Submit()]
         ]
 
         window = view.Window('Pontos').Layout(layout)
@@ -86,6 +113,40 @@ class GameScreen:
         return int(first_player)
 
     def get_replacement_players(self, players_at_field, players_at_bench):
+
+        selected_field = [[view.Text("Selecione o jogador que irá sair")]] + [
+            [view.Radio('Número ' + str(player.number), 'radio1')] for player in players_at_field
+        ] + [[view.Submit()]]
+
+        selected_bench = [[view.Text("Selecione o jogador que irá entrar")]] + [
+            [view.Radio('Número ' + str(player.number), 'radio2')] for player in players_at_bench
+        ] + [[view.Submit()]]
+
+        window = view.Window('Titulares').Layout(selected_field)
+        event, values = window.Read()
+        window.close()
+
+        for key in values.keys():
+            if values[key] == True:
+                first_player = key
+
+        window = view.Window('Reservas').Layout(selected_bench)
+        event, values = window.Read()
+        window.close()
+
+        for key in values.keys():
+            if values[key] == True:
+                second_player = key
+
+        return first_player, second_player
+
+        string = '''
+                Jogadores titulares
+        ----------------------------------
+        '''
+        for player in players_at_field:
+            string += '''{index} - {number}
+        '''.format(index=players_at_field.index(player), number=player.number)
 
         selected_field = [[view.Text("Selecione o jogador que ira sair")]] + [
             [view.Radio('Numero ' + str(player.number), 'radio1')] for player in players_at_field
