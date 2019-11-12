@@ -7,10 +7,6 @@ class AbstractModalityController(ABC):
         pass
 
     @abstractmethod
-    def section_name(self):
-        pass
-
-    @abstractmethod
     def create_modality(self):
         pass
 

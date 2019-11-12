@@ -7,10 +7,6 @@ class AbstractTeamController(ABC):
         pass
 
     @abstractmethod
-    def section_name(self):
-        pass
-
-    @abstractmethod
     def add_score(self):
         pass
 

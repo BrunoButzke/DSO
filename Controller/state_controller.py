@@ -11,9 +11,7 @@ class StateController:
         self.__teams_controller = None
 
     def start_flow(self):
-        ModalityController().section_name()
         self.__modality_controller = ModalityController().main()
-        TeamController().section_name()
         self.__teams_controller = TeamController()
 
         number_of_players = self.__modality_controller.modality.number_of_players

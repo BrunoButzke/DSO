@@ -12,9 +12,6 @@ class ModalityController(AbstractModalityController):
     def __str__(self):
         return self.__modality.name
 
-    def section_name(self):
-        ModalityScreen().section_name()
-
     def create_modality(self, name, number_of_players_per_team, gender):
         self.__modality = Modality(name, number_of_players_per_team, gender)
 

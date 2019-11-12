@@ -14,9 +14,6 @@ class TeamController(AbstractTeamController):
     def teams(self):
         return self.__teams
 
-    def section_name(self):
-        TeamScreen().section_name()
-
     def add_score(self, index_team, score):
         self.teams[index_team].score = score
 
@@ -39,8 +36,8 @@ class TeamController(AbstractTeamController):
         self.__teams.append(Team(name, number_of_players, players_at_field, players_at_bench))
 
     def main(self, min_number_of_players):
-        name = TeamScreen().get_name()
-        number_of_players = TeamScreen().get_number_of_players()
+        name, number_of_players = TeamScreen().get_data()
+        #number_of_players = TeamScreen().get_number_of_players()
 
         while number_of_players < min_number_of_players:
             TeamScreen().alert_min_players(min_number_of_players)
