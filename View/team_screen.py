@@ -4,7 +4,7 @@ import PySimpleGUI as view
 class TeamScreen:
     def __init__(self):
         pass
-    
+
     def check_valid_string_response(self, string):
         while True:
             try:
@@ -25,7 +25,7 @@ class TeamScreen:
             except ValueError:
                 print("\nOps, Você deve informar um número")
             except Exception:
-                print("\nO número deve estar entre [0 e {max}]".format(max = max_value))    
+                print("\nO número deve estar entre [0 e {max}]".format(max = max_value))
 
     def section_name(self):
         print('''\n>>>>>>>>>> Configuração do Time <<<<<<<<<<''')
@@ -44,7 +44,7 @@ class TeamScreen:
             [view.InputText()],
             [view.Text('Qual o número total de jogadores de sua equipe?')],
             [view.InputText()],
-            [view.Submit()]  
+            [view.Submit()]
         ]
         window = view.Window('Time').Layout(layout)
         button, values = window.Read()
