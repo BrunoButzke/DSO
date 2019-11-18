@@ -33,17 +33,6 @@ class GameScreen:
 
         return int(button)
 
-        print('''
-                    Menu de opções
-            ------------------------------
-            1 - Marcar pontos
-            2 - Dar cartão para jogador
-            3 - Substituir um jogador
-            4 - Finalizar a partida
-            ''')
-
-        return self.check_valid_response("Digite o número da opção desejada: ", 4)
-    
     def get_team(self, teams):
 
         layout = [
@@ -54,37 +43,42 @@ class GameScreen:
         window = view.Window('Time').Layout(layout)
         button, values = window.Read()
         window.close()
-        
-        return button
 
-        string ='''
-                    Times
-        ------------------------------
-        '''
+        return int(button)
 
-        for team in teams:
-            string += '''{index} - {number}
-        '''.format(index=teams.index(team), number=team.name)
-
-        print(string)
+        layout = [[view.Radio(f'{team.index}' - f'{team.number}', team.index)] for team in teams]
+        window = view.Window('Times').Layout(layout)
+        window.close()
 
         return self.check_valid_response("Qual time? (informe o número): ", 1)
 
     def get_score(self, team_name):
-        return  self.check_valid_response("\nQuantos pontos {name} deve ganhar? ".format(name = team_name), 100)
+
+        layout = [
+            [view.Text('Quantos pontos f"{team_name}" deve ganhar?')],
+            [view.InputText()],
+            [view.Submit()]
+        ]
+        window = view.Window('Pontos para f"{team_name}"').Layout(layout)
+        event, values = window.Read()
+        window.close()
+        return int(values[0])
 
     def get_player(self, team_players):
-        string = '''
-                Jogadores
-        -------------------------
-        '''
-        for player in team_players:
-            string += '''{index} - {number}
-        '''.format(index=team_players.index(player), number=player.number)
 
-        print(string)
+        headings = [
+            [view.Text('Qual jogador deve receber o cartão?')]
+        ] + [['Index', 'Número']]
+        header =  [[view.Text(h) for h in headings]]
+        radio_buttons = [
+            [view.Radio(team_players.index(player), 'radio1'), view.Text(str(player.number))] for player in team_players
+        ] + [[view.Submit()]]
 
-        return self.check_valid_response("\nQual jogador deve receber o cartão? ", len(team_players))
+        layout = header + radio_buttons
+        window = view.Window('Jogadores').Layout(layout)
+        event, values = window.Read()
+        window.close()
+        return int(values[0])
 
     def get_replacement_players(self, players_at_field, players_at_bench):
         string = '''
