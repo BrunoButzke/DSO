@@ -55,23 +55,20 @@ class GameScreen:
     def get_score(self, team_name):
 
         layout = [
-            [view.Text('Quantos pontos f"{team_name}" deve ganhar?')],
+            [view.Text(f'Quantos pontos {team_name} deve ganhar?')],
             [view.InputText()],
             [view.Submit()]
         ]
-        window = view.Window('Pontos para f"{team_name}"').Layout(layout)
+        window = view.Window(f'Pontos para {team_name}').Layout(layout)
         event, values = window.Read()
         window.close()
         return int(values[0])
 
     def get_player(self, team_players):
 
-        headings = [
-            [view.Text('Qual jogador deve receber o cartão?')]
-        ] + [['Index', 'Número']]
-        header =  [[view.Text(h) for h in headings]]
+        header = [[view.Text('Qual jogador deve receber o cartão?')]]
         radio_buttons = [
-            [view.Radio(team_players.index(player), 'radio1'), view.Text(str(player.number))] for player in team_players
+            [view.Radio(str(player.number), 'radio1')] for player in team_players
         ] + [[view.Submit()]]
 
         layout = header + radio_buttons

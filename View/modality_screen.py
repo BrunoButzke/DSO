@@ -45,10 +45,10 @@ class ModalityScreen:
         ]
         window = view.Window('Modalidade').Layout(layout)
         button, values = window.Read()
-        window.close()
-        return values[0], int(values[1]), values[2]
 
-        #name = self.check_valid_string_response("\nQual o nome da modalidade? ")
-        #number_of_players = self.check_valid_int_response("\nQual o número de jogadores titulares por time? ", 10)
-        #gender = self.check_valid_string_response("\nQual o gênero da modalidade? ")
-        #return name, int(number_of_players), gender
+        name = values[0]
+        number_of_players = int(values[1])
+        gender = values[2]
+
+        window.close()
+        return name, number_of_players, gender
