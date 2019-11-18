@@ -28,6 +28,9 @@ class PlayerScreen:
         ]
         window = view.Window('Jogador').Layout(layout)
         button, values = window.Read()
-        window.close()
 
-        return int(values[0]), int(values[1])
+        registration = int(values[0])
+        number_of_player = int(values[1])
+
+        window.close()
+        return registration, number_of_player

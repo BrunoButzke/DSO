@@ -51,9 +51,12 @@ class TeamScreen:
         ]
         window = view.Window('Time').Layout(layout)
         button, values = window.Read()
-        window.close()
 
-        return values[0], int(values[1])
+        team_name = values[0]
+        total_of_players = int(values[1])
+
+        window.close()
+        return team_name, total_of_players
 
     def alert_min_players(self, min_players):
         print("\nAtenção: o número mínimo de jogadores deve ser igual a " + str(min_players))
