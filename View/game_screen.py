@@ -82,7 +82,7 @@ class GameScreen:
     def get_player(self, team_players):
 
         selected_field = [[view.Text("Selecione o jogador que receberá o cartão:")]] + [
-            [view.Radio(f'Número {player.number}', f'{player.index}')] for player in team_players
+            [view.Radio(f'Número {player.number}', f'{team_players.index(player)}')] for player in team_players
         ] + [[view.Submit()]]
 
         window = view.Window('Titulares').Layout(selected_field)
