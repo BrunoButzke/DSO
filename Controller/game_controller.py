@@ -48,4 +48,7 @@ class GameController(AbstractGameController):
         for team in teams:
             if(len(team.players_at_field) > 0 and len(team.players_at_bench) > 0):
                 valid_teams.append(team)
+            else:
+                valid_teams.append(None)
+                
         return valid_teams
