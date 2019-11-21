@@ -61,7 +61,7 @@ class TeamScreen:
     def alert_min_players(self, min_players):
         print("\nAtenção: o número mínimo de jogadores deve ser igual a " + str(min_players))
 
-    def confirm_team(self, name, number_of_players, min_players, jogadores_linha, jogadores_banco):
+    def confirm_team(self, name, number_of_players, min_players, jogadores_linha, jogadores_banco, remove_player):
         linha = [[view.Text('Jogadores titulares:')]] +\
                 [[view.Text(f'- Número {jogador.number}')] for jogador in jogadores_linha]
 
@@ -72,10 +72,29 @@ class TeamScreen:
         layout = [[view.Text(f'Time: {name}')]] + \
                 linha + \
                 banco + \
-                [[view.Submit(), view.Button('Excluir jogador')]]
+                [[view.Submit(key='submit'), view.Button('Excluir jogador', key='delete_player')]]
 
         window = view.Window(f'Confirmar time {name}?').Layout(layout)
         button, values = window.Read()
+        if button == 'delete_player':
+            jogadores_banco = remove_player(min_players, jogadores_banco)
 
         window.close()
         return name, number_of_players, jogadores_linha, jogadores_banco
+
+    def delete_player(self, jogadores_banco):
+        banco = [[view.Text('Jogadores reserva:')]] + \
+                [[view.Radio(f'Número {jogador.number}', f'{jogador.number}')] for jogador in jogadores_banco] \
+                    if len(jogadores_banco) != 0 else []
+
+        layout = banco + [[view.Submit()]]
+
+        window = view.Window('Qual reserva deve ser excluído?').Layout(layout)
+        button, values = window.Read()
+        window.close()
+
+        for key in values.keys():
+            if values[key] == True:
+                excluded_player = key
+        print(excluded_player)
+        return int(excluded_player)
