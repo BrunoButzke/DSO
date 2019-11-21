@@ -52,6 +52,8 @@ class TeamController(AbstractTeamController):
         for i in range (0, (number_of_players - min_number_of_players)):
             jogadores_banco.append(PlayerController().main())
 
+        name, number_of_players, jogadores_linha, jogadores_banco = TeamScreen().confirm_team(name, number_of_players, min_number_of_players, jogadores_linha, jogadores_banco)
+
         self.create_team(name, number_of_players, jogadores_linha, jogadores_banco)
 
         return self
