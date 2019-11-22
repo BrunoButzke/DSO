@@ -4,6 +4,7 @@ from Controller.player_controller import PlayerController
 from Controller.game_controller import GameController
 from Controller.report_controller import ReportController
 
+import pickle
 
 class StateController:
     def __init__(self):
@@ -12,6 +13,13 @@ class StateController:
 
     def start_flow(self):
         self.__modality_controller = ModalityController().main()
+
+        arq_modalidade = open('modalidade.pkl', 'wb')
+        pickle.dump(self.__modality_controller, arq_modalidade)
+
+        arq_modalidade = open('modalidade.pkl', 'rb')
+        print(pickle.load(arq_modalidade)) 
+
         self.__teams_controller = TeamController()
 
         number_of_players = self.__modality_controller.modality.number_of_players

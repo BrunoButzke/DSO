@@ -5,45 +5,73 @@ class ModalityScreen:
     def __init__(self):
         pass
 
-    def check_valid_string_response(self, string):
+    def check_valid_string_response(self, response):
         while True:
             try:
-                response = input(string)
                 if len(response.strip()) == 0 :
                     raise Exception()
                 return response
             except Exception:
-                print("\nOps, Você deve informar um nome")
+                layout = [
+                    [view.Text('Ops, Você deve informar um nome')],
+                    [view.Ok()]
+                ]
+                window = view.Window('Aviso').Layout(layout)
+                button = window.Read()
+                window.close()
+                return False
 
-    def check_valid_int_response(self, string, max_value):
-        while True:
-            try:
-                response = int(input(string))
-                if response > max_value or response < 1 :
-                    raise Exception()
-                return response
-            except ValueError:
-                print("\nOps, Você deve informar um número")
-            except Exception:
-                print("\nO número deve estar entre [1 e {max}]".format(max = max_value))
+    def check_valid_int_response(self, response, max_value):
+        try:
+            response = int(response)
+            if response > max_value or response < 1 :
+                raise Exception()
+            return True
+        except ValueError:
+            layout = [
+                [view.Text('Ops, Você deve informar um número')],
+                [view.Ok()]
+            ]
+            window = view.Window('Aviso').Layout(layout)
+            button = window.Read()
+            window.close()
+            return False
+        except Exception:
+            layout = [
+                [view.Text('O número deve estar entre [1 e {max}]'.format(max = max_value))],
+                [view.Ok()]
+            ]
+            window = view.Window('Aviso').Layout(layout)
+            button = window.Read()
+            window.close()
+            return False
 
     def get_data(self):
+        valid_response = False
 
-        layout = [
-            [view.Text('Qual o nome da modalidade?')],
-            [view.InputText()],
-            [view.Text('Qual o número de jogadores titulares por time?')],
-            [view.InputText()],
-            [view.Text('Qual o gênero da modalidade?')],
-            [view.InputText()],
-            [view.Submit()]
-        ]
-        window = view.Window('Modalidade').Layout(layout)
-        button, values = window.Read()
+        while not(valid_response):
 
-        name = values[0]
-        number_of_players = int(values[1])
-        gender = values[2]
+            layout = [
+                [view.Text('Qual o nome da modalidade?')],
+                [view.InputText()],
+                [view.Text('Qual o número de jogadores titulares por time?')],
+                [view.InputText()],
+                [view.Text('Qual o gênero da modalidade?')],
+                [view.InputText()],
+                [view.Submit()]
+            ]
 
-        window.close()
+            window = view.Window('Modalidade').Layout(layout)
+            button, values = window.Read()
+
+            name = values[0]
+            number_of_players = values[1]
+            gender = values[2]
+
+            window.close()
+            if(button == 'Submit'):
+                valid_response = self.check_valid_string_response(name) and self.check_valid_int_response(number_of_players, 7) and self.check_valid_string_response(gender) 
+            else:
+                exit(0)
+
         return name, number_of_players, gender
