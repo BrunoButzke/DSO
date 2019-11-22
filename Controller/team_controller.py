@@ -36,8 +36,13 @@ class TeamController(AbstractTeamController):
         self.__teams.append(Team(name, number_of_players, players_at_field, players_at_bench))
 
     # `excluded_player` é o index do radio button
-    def remove_player(self, min_players, banco):
-        excluded_player = TeamScreen.delete_player(min_players, banco)
+    def remove_starting_player(self, min_players, titular):
+        excluded_player = TeamScreen.delete_starting_player(min_players, titular)
+        return [player for player in titular if not titular[excluded_player]]
+
+    # `excluded_player` é o index do radio button
+    def remove_bench_player(self, min_players, banco):
+        excluded_player = TeamScreen.delete_bench_player(min_players, banco)
         return [player for player in banco if not banco[excluded_player]]
 
     def main(self, min_number_of_players):
@@ -57,9 +62,9 @@ class TeamController(AbstractTeamController):
         for i in range (0, (number_of_players - min_number_of_players)):
             jogadores_banco.append(PlayerController().main())
 
-        # FIXME window close only if select `Excluir`
-        while len(jogadores_banco) > 0:
-            name, number_of_players, jogadores_linha, jogadores_banco = TeamScreen().confirm_team(name, number_of_players, min_number_of_players, jogadores_linha, jogadores_banco, self.remove_player)
+        exit_exclude_screen = False
+        while exit_exclude_screen == False:
+            name, number_of_players, jogadores_linha, jogadores_banco, exit_exclude_screen = TeamScreen().confirm_team(name, number_of_players, min_number_of_players, jogadores_linha, jogadores_banco, self.remove_starting_player, self.remove_bench_player)
 
         self.create_team(name, number_of_players, jogadores_linha, jogadores_banco)
 

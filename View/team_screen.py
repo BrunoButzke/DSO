@@ -61,7 +61,7 @@ class TeamScreen:
     def alert_min_players(self, min_players):
         print("\nAtenção: o número mínimo de jogadores deve ser igual a " + str(min_players))
 
-    def confirm_team(self, name, number_of_players, min_players, jogadores_linha, jogadores_banco, remove_player):
+    def confirm_team(self, name, number_of_players, min_players, jogadores_linha, jogadores_banco, remove_starting_player, remove_bench_player):
         linha = [[view.Text('Jogadores titulares:')]] +\
                 [[view.Text(f'- Número {jogador.number}')] for jogador in jogadores_linha]
 
@@ -72,17 +72,39 @@ class TeamScreen:
         layout = [[view.Text(f'Time: {name}')]] + \
                 linha + \
                 banco + \
-                [[view.Submit(key='submit'), view.Button('Excluir jogador', key='delete_player')]]
+                [[view.Submit(key='submit'), view.Button('Excluir jogador titular', key='delete_starting_player'), view.Button('Excluir jogador reserva', key='delete_bench_player')]]
 
         window = view.Window(f'Confirmar time {name}?').Layout(layout)
         button, values = window.Read()
-        if button == 'delete_player':
-            jogadores_banco = remove_player(min_players, jogadores_banco)
-
+        if button == 'delete_bench_player':
+            window.close()
+            jogadores_banco = remove_bench_player(min_players, jogadores_banco)
+        if button == 'delete_starting_player':
+            window.close()
+            jogadores_linha = remove_starting_player(min_players, jogadores_linha)
+        if button == 'submit':
+            window.close()
+            return name, number_of_players, jogadores_linha, jogadores_banco, True
         window.close()
-        return name, number_of_players, jogadores_linha, jogadores_banco
+        return name, number_of_players, jogadores_linha, jogadores_banco, False
 
-    def delete_player(self, jogadores_banco):
+    def delete_starting_player(self, jogadores_titulares):
+        banco = [[view.Text('Jogadores tituares:')]] + \
+                [[view.Radio(f'Número {jogador.number}', f'{jogador.number}')] for jogador in jogadores_titulares] \
+                    if len(jogadores_titulares) != 0 else []
+
+        layout = banco + [[view.Submit()]]
+
+        window = view.Window('Qual titular deve ser excluído?').Layout(layout)
+        button, values = window.Read()
+        window.close()
+
+        for key in values.keys():
+            if values[key] == True:
+                excluded_player = key
+        return int(excluded_player)
+
+    def delete_bench_player(self, jogadores_banco):
         banco = [[view.Text('Jogadores reserva:')]] + \
                 [[view.Radio(f'Número {jogador.number}', f'{jogador.number}')] for jogador in jogadores_banco] \
                     if len(jogadores_banco) != 0 else []
