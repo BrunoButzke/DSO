@@ -38,12 +38,15 @@ class TeamController(AbstractTeamController):
     # `excluded_player` é o index do radio button
     def remove_starting_player(self, min_players, titular):
         excluded_player = TeamScreen.delete_starting_player(min_players, titular)
-        return [player for player in titular if not titular[excluded_player]]
+        titular.remove(titular[excluded_player])
+        return titular
 
     # `excluded_player` é o index do radio button
     def remove_bench_player(self, min_players, banco):
         excluded_player = TeamScreen.delete_bench_player(min_players, banco)
-        return [player for player in banco if not banco[excluded_player]]
+        print(excluded_player)
+        banco.remove(banco[excluded_player])
+        return banco
 
     def main(self, min_number_of_players):
         name, number_of_players = TeamScreen().get_data()
