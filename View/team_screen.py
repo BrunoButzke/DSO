@@ -54,20 +54,36 @@ class TeamScreen:
         banco = [[view.Text('Jogadores reserva:')]] + \
                 [[view.Text(f'- Número {jogador.number}')] for jogador in jogadores_banco] \
                     if len(jogadores_banco) != 0 else []
+        if len(jogadores_banco) > 0:
+            layout = [[view.Text(f'Time: {name}')]] + \
+                    linha + \
+                    banco + \
+                    [[view.Submit(key='submit'), view.Button('Excluir jogador reserva', key='delete_bench_player')]]
+        else:
+            layout = [[view.Text(f'Time: {name}')]] + \
+                    linha + \
+                    banco + \
+                    [[view.Submit(key='submit')]]
 
-        layout = [[view.Text(f'Time: {name}')]] + \
-                linha + \
-                banco + \
-                [[view.Submit(key='submit'), view.Button('Excluir jogador titular', key='delete_starting_player'), view.Button('Excluir jogador reserva', key='delete_bench_player')]]
+        #                 layout = [[view.Text(f'Time: {name}')]] + \
+        #         linha + \
+        #         banco + \
+        #         [[view.Submit(key='submit')]
+
+        # teste = ""
+        # if len(jogadores_banco) > 0 :
+        #     teste = view.Button('Excluir jogador reserva', key='delete_bench_player')]
+
+        # layout += teste
 
         window = view.Window(f'Confirmar time {name}?').Layout(layout)
         button, values = window.Read()
         if button == 'delete_bench_player':
             window.close()
             jogadores_banco = remove_bench_player(min_players, jogadores_banco)
-        if button == 'delete_starting_player':
-            window.close()
-            jogadores_linha = remove_starting_player(min_players, jogadores_linha)
+        # if button == 'delete_starting_player':
+        #     window.close()
+        #     jogadores_linha = remove_starting_player(min_players, jogadores_linha)
         if button == 'submit':
             window.close()
             return name, number_of_players, jogadores_linha, jogadores_banco, True

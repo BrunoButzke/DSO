@@ -35,20 +35,21 @@ class GameController(AbstractGameController):
         self.__teams.add_card(index_team, index_player)
 
     def replace_player(self):
-        valid_teams = self.teams_allowed_to_be_replaced(self.__teams.teams)
+        valid_teams, first_empty = self.teams_allowed_to_be_replaced(self.__teams.teams)
         index_team = GameScreen().get_team(valid_teams)
         starter, bench = GameScreen().get_replacement_players(
-            self.__teams.teams[index_team].players_at_field,
-            self.__teams.teams[index_team].players_at_bench
+            self.__teams.teams[index_team + first_empty].players_at_field,
+            self.__teams.teams[index_team + first_empty].players_at_bench
         )
-        self.__teams.replace_player(index_team, starter, bench)
+        self.__teams.replace_player(index_team + first_empty, starter, bench)
 
     def teams_allowed_to_be_replaced(self, teams):
         valid_teams = []
+        first_empty = 0
+        if(len(teams[0].players_at_bench) <= 0):
+            first_empty = 1
         for team in teams:
             if(len(team.players_at_field) > 0 and len(team.players_at_bench) > 0):
                 valid_teams.append(team)
-            else:
-                valid_teams.append(None)
-                
-        return valid_teams
+
+        return valid_teams, first_empty

@@ -15,7 +15,7 @@ class TeamController(AbstractTeamController):
         return self.__teams
 
     def add_score(self, index_team, score):
-        self.teams[index_team].score = score
+        self.teams[index_team].score += score
 
     def add_card(self, index_team, index_player):
         self.teams[index_team].players_at_field[index_player].cards += 1
@@ -59,10 +59,10 @@ class TeamController(AbstractTeamController):
         jogadores_linha = []
         jogadores_banco = []
 
-        for i in range (0, min_number_of_players):
+        for i in range (0, int(min_number_of_players)):
             jogadores_linha.append(PlayerController().main())
 
-        for i in range (0, (number_of_players - min_number_of_players)):
+        for i in range (0, (number_of_players - int(min_number_of_players))):
             jogadores_banco.append(PlayerController().main())
 
         exit_exclude_screen = False

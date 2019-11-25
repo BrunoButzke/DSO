@@ -36,8 +36,7 @@ class GameScreen:
     def get_team(self, teams):
 
         layout = [
-            [view.Button(teams[0].name, key='0')],
-            [view.Button(teams[1].name, key='1')]
+            [view.Button(f'{team.name}', key=f'{teams.index(team)}')] for team in teams
         ]
 
         window = view.Window('Time').Layout(layout)
