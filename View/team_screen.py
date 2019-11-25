@@ -1,5 +1,6 @@
 import PySimpleGUI as view
 
+import error_boundary
 
 class TeamScreen:
     def __init__(self):
@@ -28,20 +29,27 @@ class TeamScreen:
                 print("\nO número deve estar entre [0 e {max}]".format(max = max_value))
 
     def get_data(self):
-        layout = [
-            [view.Text('Qual o nome do time?')],
-            [view.InputText()],
-            [view.Text('Qual o número total de jogadores de sua equipe?')],
-            [view.InputText()],
-            [view.Submit()]
-        ]
-        window = view.Window('Time').Layout(layout)
-        button, values = window.Read()
+        valid_response = False
 
-        team_name = values[0]
-        total_of_players = int(values[1])
+        while not(valid_response):
+            layout = [
+                [view.Text('Qual o nome do time?')],
+                [view.InputText()],
+                [view.Text('Qual o número total de jogadores de sua equipe?')],
+                [view.InputText()],
+                [view.Submit()]
+            ]
+            window = view.Window('Time').Layout(layout)
+            button, values = window.Read()
 
-        window.close()
+            team_name = values[0]
+            total_of_players = values[1]
+
+            window.close()
+            if(button == 'Submit'):
+                valid_response = error_boundary.check_valid_string_response(team_name) and error_boundary.check_valid_int_response(total_of_players, 17)
+            else:
+                exit(0)
         return team_name, total_of_players
 
     def alert_min_players(self, min_players):

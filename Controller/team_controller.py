@@ -52,7 +52,7 @@ class TeamController(AbstractTeamController):
         name, number_of_players = TeamScreen().get_data()
         #number_of_players = TeamScreen().get_number_of_players()
 
-        while number_of_players < int(min_number_of_players):
+        while int(number_of_players) < int(min_number_of_players):
             TeamScreen().alert_min_players(min_number_of_players)
             #number_of_players = TeamScreen().get_number_of_players()
 
@@ -62,7 +62,7 @@ class TeamController(AbstractTeamController):
         for i in range (0, int(min_number_of_players)):
             jogadores_linha.append(PlayerController().main())
 
-        for i in range (0, (number_of_players - int(min_number_of_players))):
+        for i in range (0, (int(number_of_players) - int(min_number_of_players))):
             jogadores_banco.append(PlayerController().main())
 
         exit_exclude_screen = False
