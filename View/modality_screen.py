@@ -65,12 +65,12 @@ class ModalityScreen:
             button, values = window.Read()
 
             name = values[0]
-            number_of_players = values[1]
+            number_of_players = int(values[1])
             gender = values[2]
 
             window.close()
             if(button == 'Submit'):
-                valid_response = self.check_valid_string_response(name) and self.check_valid_int_response(number_of_players, 7) and self.check_valid_string_response(gender) 
+                valid_response = self.check_valid_string_response(name) and self.check_valid_int_response(number_of_players, 7) and self.check_valid_string_response(gender)
             else:
                 exit(0)
 
